@@ -32,6 +32,22 @@ class Drawing {
     }
     /**
      *
+     * @param x 左上の座標
+     * @param y 左上の座標
+     * @param w 四角形の幅
+     * @param h 四角形の高さ
+     * @param f 1:塗り潰し、2:枠、3:塗り潰し+枠
+     */
+    rect(x, y, w, h, f) {
+        if (f & 1) { // 塗り潰し
+            this.context?.fillRect(x, y, w, h);
+        }
+        if (f & 2) { // 枠
+            this.context?.strokeRect(x, y, w, h);
+        }
+    }
+    /**
+     *
      * @param selector  canvasエレメントを設置するエレメントへのセレクター
      * @param width     canvasの幅(既定値：512ピクセル)
      * @param height    canvasの高さ(既定値：512ピクセル)
