@@ -1,0 +1,12 @@
+@charset "UTF-8";
+html {
+
+}
+
+body{
+    width: max-content;
+}
+
+#life canvas {
+    border: 1px solid black;
+}
