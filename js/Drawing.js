@@ -86,12 +86,18 @@ class Drawing {
         if (p.last) {
             this.context?.lineTo(cx, cy);
         }
-        //  円弧を塗りつぶす
-        this.context?.fill();
-        //  円弧に枠線を引く
-        this.context?.stroke();
-        //  パスモードを終了する
+        //  パスモードを終了する → 最後の点と最初の点を結ぶ線を引く
         this.context?.closePath();
+        //  塗り潰しフラグが1
+        if (p.f & 1) {
+            //  円弧を塗りつぶす
+            this.context?.fill();
+        }
+        //  枠線フラグが1
+        if (p.f & 2) {
+            //  円弧に枠線を引く
+            this.context?.stroke();
+        }
     }
     /**
      *

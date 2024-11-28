@@ -1,10 +1,10 @@
 // arcメソッド用のパラメータクラス
 //  パラメータをクラス化する
 class ArcParams {
-    f = 2           // 描画方法 1:塗り潰し、2:枠線:、3:塗り潰し+枠線
-    sd = 0          // 開始角度 既定値:0度
-    ed = 360        // 終了角度 既定値:360度
-    last = true     // 最後のlineToメソッドを実行するか true:実行する、false:実行しない
+    f:number = 2            // 描画方法 1:塗り潰し、2:枠線:、3:塗り潰し+枠線
+    sd:number = 0           // 開始角度 既定値:0度
+    ed:number = 360         // 終了角度 既定値:360度
+    last:boolean = true     // 最後のlineToメソッドを実行するか true:実行する、false:実行しない
 }
 
 class Drawing {
@@ -81,15 +81,21 @@ class Drawing {
         //  円弧を描くようにパスを設定する
         this.context?.arc(cx, cy, r, sr, er)
         //  円弧の最後の点から中心点へパスを割り当てる
-        if (p.last){
+        if (p.last) {
             this.context?.lineTo(cx, cy)
         }
-        //  円弧を塗りつぶす
-        this.context?.fill()
-        //  円弧に枠線を引く
-        this.context?.stroke()
-        //  パスモードを終了する
+        //  パスモードを終了する → 最後の点と最初の点を結ぶ線を引く
         this.context?.closePath()
+        //  塗り潰しフラグが1
+        if (p.f & 1) {
+            //  円弧を塗りつぶす
+            this.context?.fill()
+        }
+        //  枠線フラグが1
+        if (p.f & 2) {
+            //  円弧に枠線を引く
+            this.context?.stroke()
+        }
     }
 
     /**
